@@ -1,1 +1,1 @@
-DB_NAME = "teckathon"
+export const DB_NAME = "Teckathon"

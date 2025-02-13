@@ -5,7 +5,7 @@ import dotenv from "dotenv"
 // import express from "express";
 // import mongoose from "mongoose";
 // import { DB_NAME } from "./constants";
-import ConnectionInstance from "./db/index.js";
+import ConnectionInstance from "../db/index.js";
 dotenv.config({path:'./env'})
 
 
@@ -18,6 +18,7 @@ ConnectionInstance()
 
     } catch (error) {
         console.log("Error: ",error)
+        console.log(process.env.MONGODB_URI)
         throw error
         
     }
