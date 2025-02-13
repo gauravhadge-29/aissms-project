@@ -4,7 +4,7 @@ import {User} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.js"
 import {ApiResponse} from "../utils/ApiResponse.js"
 import  jwt  from "jsonwebtoken";
-import mongoose from "mongoose";
+
 
 const generateAccessAndRefreshTokens = async(userId)=>{
     try {
@@ -30,7 +30,7 @@ const generateAccessAndRefreshTokens = async(userId)=>{
 }
 
 const registerUser = asyncHandler( async (req,res)=>{
- //steps
+//steps
 //get user details from front end
 //validation
 //check if user already exist
@@ -82,9 +82,6 @@ if(!avatarLocalPath){
 const avatar = await uploadOnCloudinary(avatarLocalPath)
 const coverImage  = await uploadOnCloudinary(coverImageLocalPath)
 
-if(!avatar){
-    throw new ApiError(400,"Avatar file is required");
-}
 
 const user = await  User.create({
     fullName,
@@ -106,8 +103,6 @@ if (!createdUser) {
 return res.status(201).json(
     new ApiResponse(200, createdUser , "User registered Successfully")
 )
-
-
 })
 
 const loginUser = asyncHandler(async (req,res) => {
