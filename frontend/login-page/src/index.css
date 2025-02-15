@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(120deg, #2980b9, #8e44ad);
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#root {
+    width: 100%;
+    padding: 0 0.6rem;
+}
+
+.login-container {
+    max-width: 430px;
+    margin: 0 auto;
+    border-radius: 1.5rem;
+    padding: 3rem 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(15px);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.login-container:hover {
+    transform: translateY(-5px);
+}
+
+.login-container .social-login {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.login-container .form-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.social-login .social-button {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 1rem 0;
+    align-items: center;
+    border: 2px solid #e0e0e0;
+    background-color: #ffffff;
+    border-radius: 0.8rem;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.social-login .social-button:hover {
+    background-color: #f8f9fa;
+    border-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(41, 128, 185, 0.2);
+}
+
+.social-login .social-button .social-icon {
+    width: 28px;
+}
+
+.login-container .seprator {
+    margin: 2.5rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.login-container .seprator span {
+    position: relative;
+    background-color: #fff;
+    z-index: 1;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #7f8c8d;
+    text-transform: uppercase;
+}
+
+.login-container .seprator::after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ecf0f1;
+}
+
+.login-form .input-wrapper {
+    height: 60px;
+    width: 100%;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.login-form .input-wrapper .input-field {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    font-size: 1.1rem;
+    border-radius: 0.8rem;
+    border: 2px solid #ecf0f1;
+    padding: 0 1.5rem 0 3.5rem;
+    transition: all 0.4s ease;
+    background-color: #f8f9fa;
+}
+
+.login-form .input-wrapper .input-field::placeholder {
+    color: #95a5a6;
+    font-weight: 500;
+}
+
+.login-form .input-wrapper .input-field:focus {
+    border-color: #2980b9;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.1);
+}
+
+.login-form .input-wrapper i {
+    color: #95a5a6;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.login-form .input-wrapper i:not(.eye-icon) {
+    left: 1.2rem;
+    pointer-events: none;
+}
+
+.login-form .input-wrapper .input-field:focus ~ i:not(.eye-icon) {
+    color: #2980b9;
+}
+
+.login-form .login-button {
+    width: 100%;
+    height: 60px;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top: 2.5rem;
+    background: linear-gradient(120deg, #2980b9, #8e44ad);
+    border-radius: 0.8rem;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.login-form .login-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(41, 128, 185, 0.3);
+}
+
+.login-form .login-button:active {
+    transform: translateY(-1px);
+}
+
+.login-form .forgot-pass-link {
+    display: block;
+    width: fit-content;
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    color: #7f8c8d;
+}
+
+.login-container .signup-text {
+    text-align: center;
+    font-weight: 500;
+    margin: 2.5rem 0 0.5rem;
+    color: #34495e;
+    font-size: 1.1rem;
+}
+
+.login-container a {
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.login-container a:hover {
+    color: #8e44ad;
+    text-decoration: underline;
+}
