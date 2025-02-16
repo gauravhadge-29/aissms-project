@@ -29,6 +29,7 @@ body {
 
 .login-container {
     max-width: 430px;
+    /* margin-top: 0.5rem; */
     margin: 0 auto;
     border-radius: 1.5rem;
     padding: 3rem 2.5rem;
@@ -154,6 +155,11 @@ body {
 .login-form .input-wrapper i:not(.eye-icon) {
     left: 1.2rem;
     pointer-events: none;
+}
+
+.login-form .input-wrapper i.eye-icon {
+    cursor: pointer !important;  /* Added !important to ensure it takes precedence */
+    right: 1.2rem;
 }
 
 .login-form .input-wrapper .input-field:focus ~ i:not(.eye-icon) {
