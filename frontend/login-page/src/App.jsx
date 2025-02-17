@@ -1,27 +1,49 @@
-import InputField from "./components/InputField";
-import SocilLogin from "./components/SocialLogin";
+import { useState } from "react";
+import SocialLogin from "./components/SocialLogin";
+import LocalLogin from "./components/LocalLogin";
 
 const App = () => {
+  // Directly set user from localStorage initially
+  const [user, setUser] = useState(() => {
+    return JSON.parse(localStorage.getItem("user")) || null;
+  });
+
+  // Function to handle login and update state
+  const handleLogin = (newUser) => {
+    localStorage.setItem("user", JSON.stringify(newUser));
+    setUser(newUser); // Update state immediately
+    window.location.reload()
+  };
+
+  // Function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setUser(null);
+  };
+
   return (
     <div className="login-container">
-
       <h2 className="form-title">Log in with</h2>
-      <SocilLogin />
 
-      <p className="seprator"><span>or</span></p>
-      <form action="" className="login-form">
-        <InputField type="email" placeholder="Email Address" icon="mail"/>
-        <InputField type="password" placeholder="Password" icon="lock"/>
-
-      <a href="#" className="forgot-pass-link">Forgot Password?</a>
-
-      <button className="login-button">Login In</button>
-      </form>
-
-      <p className="signup-text">Don&apos;t have an account? <a href="#">Signup now</a></p>
-
+      {user ? (
+        <div className="user-info">
+          <img src={user.avatar} alt="User" className="user-avatar" />
+          <p>Welcome, {user.fullName}</p>
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
+        </div>
+      ) : (
+        <>
+          <SocialLogin setUser={handleLogin} />
+          <p className="separator"><span>or</span></p>
+          <LocalLogin setUser={handleLogin} />
+        </>
+      )}
     </div>
   );
-}
+};
 
 export default App;

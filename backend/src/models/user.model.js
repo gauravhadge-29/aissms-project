@@ -1,102 +1,106 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { strict } from "assert";
 
-
-
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim:true,
-        index: true
+const userSchema = new mongoose.Schema(
+    {
+        uid: {  // ✅ Add uid for Google Auth
+            type: String,
+            unique: true,
+        },
+        username: {
+            type: String,
+            required: true,
+            unique: true,
+            lowercase: true,
+            trim: true,
+            index: true,
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            lowercase: true,
+            trim: true,
+        },
+        fullName: {
+            type: String,
+            trim: true,
+            index: true,
+            required:true
+        },
+        password: {
+            type: String,
+            required: function () {
+                return this.provider === "local"; // Password required only for local users
+            },
+            select: false, // Do not return password by default
+        },
+        avatar: {
+            type: String, // Cloudinary URL
+        },
+        refreshToken: {
+            type: String,
+            select: false, // Do not return refreshToken by default
+        },
+        provider: {
+            type: String,
+            enum: ["local", "google"],
+            default: "local",
+        },
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim:true,
-    },
-    fullName: {
-        type: String,
-        required: true,
-        trim:true,
-        index:true
-    },
-    password:{
-        type:String,
-        required:[true, 'Password is required']
-    },
-    avatar:{
-        type:String, //cloudinary url
-        required:true
-    },
-    coverImage:{
-        type:String
-    },
-    watchHistory:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Video"
-    },
-    refreshToken:{
-        type:String,
+    {
+        timestamps: true,
+    },{
+        strict: false
     }
-},
-{
-    timestamps:true
-}
-)
+);
 
-userSchema.pre("save",async function(next){
-    if(!this.isModified("password")) return next();
-    this.password = await bcrypt.hash(this.password,10)
-    next()
-} )
+// 🔹 Hash password before saving (Only for Local users)
+userSchema.pre("save", async function (next) {
+    if (!this.isModified("password") || this.provider === "google") return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+});
 
-userSchema.methods.isPasswordCorrect = async function(password){
-    return await bcrypt.compare(password,this.password)
-}
+// 🔹 Check if password is correct
+// 🔹 Check if password is correct
+userSchema.methods.isPasswordCorrect = async function (password) {
+    console.log("Password entered:", password);  // Log the entered password
+    console.log("Stored password in DB:", this.password);
+    if (this.provider === "google") return true; // No password for Google users
+    return await bcrypt.compare(password, this.password);
+};
 
-userSchema.methods.generateAccessToken = function(){
-    // console.log("Generating Access Token");
-    // console.log("Calling generateAccessToken for user: ", this.username);
 
-    const temp = jwt.sign(
+// 🔹 Generate Access Token
+userSchema.methods.generateAccessToken = function () {
+    return jwt.sign(
         {
             _id: this._id,
             email: this.email,
             username: this.username,
-            fullname: this.fullName
+            fullName: this.fullName,
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
         }
-    )
+    );
+};
 
-    // console.log("Generated acecss token: ",temp);
-    // console.log("ACCESS_TOKEN_SECRET: ", process.env.ACCESS_TOKEN_SECRET);
-    // console.log("ACCESS_TOKEN_EXPIRY: ", process.env.ACCESS_TOKEN_EXPIRY);
-
-
-    return temp
-}
-
-userSchema.methods.generateRefreshToken = function(){
+// 🔹 Generate Refresh Token
+userSchema.methods.generateRefreshToken = function () {
     return jwt.sign(
         {
             _id: this._id,
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
         }
-    )
-}
+    );
+};
 
-
-
-export const User = mongoose.model("User",userSchema);
+export const User = mongoose.model("User", userSchema);
