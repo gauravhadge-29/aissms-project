@@ -2,7 +2,6 @@ import { Router } from "express";
 import {registerUser, 
         loginUser, 
         logoutUser, 
-        changeCurrentPassword,
         refreshAccessToken, 
         loginWithGoogle,
         getCurrentUser,  
@@ -11,6 +10,7 @@ import {registerUser,
 
 import {upload} from "../middlewares/multer.middleware.js"
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { isAuthenticated } from "../middlewares/isauthenticated.middleware.js";
 
 const router = Router()
 
@@ -29,10 +29,10 @@ router.route("/auth/google").post(loginWithGoogle)
 
 
 //secured routes
-router.route("/logout").post(verifyJWT, logoutUser)
+router.route("/logout").post(isAuthenticated, logoutUser)
 router.route("/refresh-token").post(refreshAccessToken)
-router.route("/change-password").post(verifyJWT,changeCurrentPassword)
-router.route("/current-user").get(verifyJWT,getCurrentUser)
+// router.route("/change-password").post(verifyJWT,changeCurrentPassword)
+router.route("/current-user").get(isAuthenticated,getCurrentUser)
 // router.route("/avatar",).patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
 // router.route("/c/:username").get(verifyJWT,getCurrentUserProfile)
 

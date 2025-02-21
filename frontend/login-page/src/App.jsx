@@ -3,24 +3,37 @@ import SocialLogin from "./components/SocialLogin";
 import LocalLogin from "./components/LocalLogin";
 
 const App = () => {
-  // Directly set user from localStorage initially
-  const [user, setUser] = useState(() => {
-    return JSON.parse(localStorage.getItem("user")) || null;
-  });
+  const [user, setUser] = useState(null);
 
-  // Function to handle login and update state
-  const handleLogin = (newUser) => {
-    localStorage.setItem("user", JSON.stringify(newUser));
-    setUser(newUser); // Update state immediately
-    window.location.reload()
+  // Function to handle login and fetch user from API
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/v1/users/current-user", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch user data");
+      }
+      
+      const userData = await response.json();
+      console.log("RESPONSE FROM CUEENTUSER",userData)
+      setUser(userData.data); // Set user data from API response
+    } catch (error) {
+      console.error("Error fetching user:", error);
+    }
   };
 
   // Function to handle logout
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    setUser(null);
+    fetch("http://localhost:8000/api/v1/users/logout", {
+      method: "POST",
+      credentials: "include",
+    }).then(() => {
+      setUser(null);
+    }).catch(error => console.error("Logout error:", error));
   };
 
   return (

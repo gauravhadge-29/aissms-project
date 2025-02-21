@@ -20,6 +20,7 @@ const LocalLogin = ({ setUser }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+        credentials:"include"
       });
 
       const result = await response.json();
@@ -31,9 +32,9 @@ const LocalLogin = ({ setUser }) => {
         const { accessToken, refreshToken, user } = result.data;
 
     // Set these values to localStorage
-         localStorage.setItem('accessToken', accessToken);
-         localStorage.setItem('refreshToken', refreshToken);
-         localStorage.setItem('user', JSON.stringify(user)); 
+        //  localStorage.setItem('accessToken', accessToken);
+        //  localStorage.setItem('refreshToken', refreshToken);
+        //  localStorage.setItem('user', JSON.stringify(user)); 
 
         alert("Login successful!");
       } else {

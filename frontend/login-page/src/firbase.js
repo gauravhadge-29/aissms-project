@@ -42,6 +42,7 @@ export const signInWithGoogle = async () => {
           email: user.email,
           avatar : user.photoURL
         }),
+        credentials: "include"
       });
       console.log("Response: from api login with google",response)
       console.log();
@@ -66,4 +67,4 @@ export const logout = async () => {
   }
 };
 
-export { auth, app };
+export { auth, app};
