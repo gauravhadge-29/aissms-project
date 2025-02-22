@@ -17,6 +17,8 @@ const Signup = ({ setUser }) => {
     e.preventDefault();
     setError(null);
 
+    console.log(formData);
+
     try {
       const response = await fetch("https://data-discovery-login.onrender.com/api/v1/users/register", {
         method: "POST",
@@ -24,14 +26,17 @@ const Signup = ({ setUser }) => {
         body: JSON.stringify(formData),
         credentials: "include",
       });
-
+      console.log(response)
       const data = await response.json();
+      console.log(data)
 
       if (!response.ok) {
         throw new Error(data.message || "Signup failed");
       }
 
       setUser(data.data); // Set the user data after signup
+
+      
     } catch (err) {
       setError(err.message);
     }
