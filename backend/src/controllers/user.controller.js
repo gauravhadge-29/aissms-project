@@ -109,7 +109,7 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
 
     console.log("This is req.body in loginwith google",req.body)
 
-    if (!uid || !email) {
+    if (!email) {
         throw new ApiError(400, "Google login failed, missing data");
     }
 
