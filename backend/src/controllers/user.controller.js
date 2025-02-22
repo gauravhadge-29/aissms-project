@@ -126,8 +126,8 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
 
     const cookieOptions = {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax",
+        secure: true,
+        sameSite: "None",
     };
 
     return res
