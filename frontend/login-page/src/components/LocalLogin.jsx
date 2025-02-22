@@ -29,7 +29,7 @@ const LocalLogin = ({ setUser }) => {
       if (response.ok) {
         setUser(result.user); // Set user data on successful login
         console.log(result);
-        const { accessToken, refreshToken, user } = result.data;
+        // const { accessToken, refreshToken, user } = result.data;
 
     // Set these values to localStorage
         //  localStorage.setItem('accessToken', accessToken);
