@@ -33,7 +33,7 @@ const LocalLogin = ({ setUser }) => {
         // const { accessToken, refreshToken, user } = result.data;
 
     // Set these values to localStorage
-        //  localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('token', accessToken);
         //  localStorage.setItem('refreshToken', refreshToken);
         //  localStorage.setItem('user', JSON.stringify(user)); 
        

@@ -47,6 +47,7 @@ export const signInWithGoogle = async () => {
       console.log();
       const data = await response.json();
       console.log("This is data", data)
+      localStorage.setItem('token',data.accessToken)
       return data; // This will contain user info from MongoDB
     } catch (error) {
       console.error("Google Sign-In Error:", error);
