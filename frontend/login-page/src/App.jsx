@@ -1,11 +1,13 @@
 import { useState } from "react";
 import SocialLogin from "./components/SocialLogin";
 import LocalLogin from "./components/LocalLogin";
+import Signup from "./components/Signup";
+import './index.css';
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [isSignup, setIsSignup] = useState(false);
 
-  // Function to handle login and fetch user from API
   const handleLogin = async () => {
     try {
       const response = await fetch("https://data-discovery-login.onrender.com/api/v1/users/current-user", {
@@ -13,50 +15,56 @@ const App = () => {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
-      console.log(response)
-      if (!response.ok) {
-        throw new Error("Failed to fetch user data");
-      }
-      
+
+      if (!response.ok) throw new Error("Failed to fetch user data");
+
       const userData = await response.json();
-      console.log("RESPONSE FROM CUEENTUSER",userData)
-      setUser(userData.data); // Set user data from API response
+      setUser(userData.data);
     } catch (error) {
       console.error("Error fetching user:", error);
     }
   };
 
-  // Function to handle logout
-  const handleLogout = () => {
-    fetch("https://data-discovery-login.onrender.com/api/v1/users/logout", {
-      method: "POST",
-      credentials: "include",
-    }).then(() => {
+  const handleLogout = async () => {
+    try {
+      await fetch("https://data-discovery-login.onrender.com/api/v1/users/logout", {
+        method: "POST",
+        credentials: "include",
+      });
       setUser(null);
-    }).catch(error => console.error("Logout error:", error));
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
     <div className="login-container">
-      <h2 className="form-title">Log in with</h2>
-
       {user ? (
         <div className="user-info">
           <img src={user.avatar} alt="User" className="user-avatar" />
           <p>Welcome, {user.fullName}</p>
-          <button onClick={handleLogout} className="logout-button">
-            Logout
-          </button>
+          <button onClick={handleLogout} className="logout-button">Logout</button>
         </div>
+      ) : isSignup ? (
+        <>
+          <Signup setUser={setUser} />
+          <p className="toggle-text">
+            Already have an account? <button onClick={() => setIsSignup(false)}>Log in</button>
+          </p>
+        </>
       ) : (
         <>
+          <h2 className="form-title">Log in with</h2>
           <SocialLogin setUser={handleLogin} />
           <p className="separator"><span>or</span></p>
           <LocalLogin setUser={handleLogin} />
+          <p className="toggle-text">
+            Don't have an account? <button onClick={() => setIsSignup(true)}>Sign up</button>
+          </p>
         </>
       )}
     </div>
   );
 };
 
-export default App;
+export default App;
