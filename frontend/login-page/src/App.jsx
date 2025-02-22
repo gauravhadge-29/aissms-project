@@ -39,12 +39,20 @@ const App = () => {
 
   return (
     <div className="login-container">
+      {user ? (
+        <div className="user-info">
+          <img src={user.avatar} alt="User" className="user-avatar" />
+          <p>Welcome, {user.fullName}</p>
+          <button onClick={handleLogout} className="logout-button">Logout</button>
+        </div>
+      ) : isSignup ? (
         <>
           <Signup setUser={setUser} />
           <p className="toggle-text">
             Already have an account? <button onClick={() => setIsSignup(false)}>Log in</button>
           </p>
         </>
+      ) : (
         <>
           <h2 className="form-title">Log in with</h2>
           <SocialLogin setUser={handleLogin} />
@@ -54,6 +62,7 @@ const App = () => {
             Don't have an account? <button onClick={() => setIsSignup(true)}>Sign up</button>
           </p>
         </>
+      )}
     </div>
   );
 };
