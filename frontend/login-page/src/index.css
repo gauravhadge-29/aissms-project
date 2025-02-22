@@ -7,7 +7,6 @@
     font-family: "Montserrat", serif;
 }
 
-
 body {
     display: flex;
     align-items: center;
@@ -40,7 +39,6 @@ body {
     transform: translateY(0);
     transition: transform 0.3s ease;
 }
-
 
 .login-container:hover {
     transform: translateY(-5px);
@@ -88,31 +86,36 @@ body {
     width: 28px;
 }
 
-.login-container .seprator {
-    margin: 2.5rem 0;
-    text-align: center;
+.login-container .separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    text-align: center;
+    margin: 2.5rem 0;
 }
+
+.login-container .separator::after,
+.login-container .separator::before {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: #ecf0f1;
+    margin: 0 10px;
+    z-index: 0;
+}
+
 
 .login-container .seprator span {
     position: relative;
     background-color: #fff;
     z-index: 1;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     font-size: 1rem;
     font-weight: 600;
     color: #7f8c8d;
     text-transform: uppercase;
-}
-
-.login-container .seprator::after {
-    position: absolute;
-    content: "";
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #ecf0f1;
+    white-space: nowrap;
 }
 
 .login-form .input-wrapper {
@@ -219,39 +222,5 @@ body {
 
 .login-container a:hover {
     color: #8e44ad;
-    text-decoration: underline;
+    text-decoration: underline;
 }
-
-
-/* new */
-
-
-.user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-    margin-right: 10px; /* Space between the avatar and the text */
-  }
-  
-  .user-info {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    margin-top: 10px;
-  }
-  
-  .logout-button {
-    margin-left: 20px;
-    padding: 5px 10px;
-    background-color: #ff4d4d;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .logout-button:hover {
-    background-color: #e60000;
-  }
-  
