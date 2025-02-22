@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 const LocalLogin = ({ setUser }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-
+  const navigate = useNavigate(); // Declare navigate
   // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
