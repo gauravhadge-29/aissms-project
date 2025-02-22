@@ -31,7 +31,7 @@ export const signInWithGoogle = async () => {
       console.log("Responsse from google ",user)
   
       // Send user details to backend for MongoDB storage
-      const response = await fetch("http://localhost:8000/api/v1/users/auth/google", {
+      const response = await fetch("https://data-discovery-login.onrender.com/api/v1/users/auth/google", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

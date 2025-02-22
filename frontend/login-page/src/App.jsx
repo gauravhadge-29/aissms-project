@@ -8,7 +8,7 @@ const App = () => {
   // Function to handle login and fetch user from API
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/v1/users/current-user", {
+      const response = await fetch("https://data-discovery-login.onrender.com/api/v1/users/current-user", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -28,7 +28,7 @@ const App = () => {
 
   // Function to handle logout
   const handleLogout = () => {
-    fetch("http://localhost:8000/api/v1/users/logout", {
+    fetch("https://data-discovery-login.onrender.com/api/v1/users/logout", {
       method: "POST",
       credentials: "include",
     }).then(() => {
