@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputField from "./InputField"; // Importing the InputField component
+import { useNavigate } from "react-router-dom"
 
 const LocalLogin = ({ setUser }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -35,8 +36,9 @@ const LocalLogin = ({ setUser }) => {
         //  localStorage.setItem('accessToken', accessToken);
         //  localStorage.setItem('refreshToken', refreshToken);
         //  localStorage.setItem('user', JSON.stringify(user)); 
-
+       
         alert("Login successful!");
+        navigate("https://data-discovery1.vercel.app/");
       } else {
         alert(`Error: ${result.message}`);
       }

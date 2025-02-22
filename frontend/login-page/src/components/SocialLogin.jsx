@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signInWithGoogle, logout } from "../firbase";
+import { useNavigate } from "react-router-dom"
 
 export default function SocialLogin({ setUser }) {
   const handleGoogleLogin = async () => {
@@ -9,6 +10,7 @@ export default function SocialLogin({ setUser }) {
       setUser(loggedInUser); // Set user data on successful login
       console.log(loggedInUser);
       alert(`Welcome, ${loggedInUser.data.user.fullName}!`);
+      navigate("https://data-discovery1.vercel.app/");
     }
   };
 
