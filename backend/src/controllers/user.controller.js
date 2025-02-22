@@ -140,30 +140,31 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
 });
 
 // Logout user
-const logoutUser = asyncHandler(async (req, res) => {
-    // console.log("request came")
-    // console.log("Cookies received:", req.cookies);
-    // console.log("Session before logout:", req.session);
+const logoutUser = asyncHandler(async (req,res)=>{
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $unset:{
+                refreshToken: 1
+            }
+        },{
+            new: true
+        }
+    )
 
-    if (!req.session || !req.session.userId) {
-        return res.status(401).json(new ApiResponse(401, {}, "Unauthorized: No active session"));
+    const options = {
+        httpOnly: true,
+        secure: true
     }
 
-    req.session.destroy((err) => {
-        if (err) {
-            console.error("Error destroying session:", err);
-            throw new ApiError(500, "Error logging out");
-        }
+    return res
+    .status(200)
+    .clearCookie("accessToken",options)
+    .clearCookie("refreshToken",options)
+    .json( new ApiResponse (200,{}, "User Logged out successfully"))
 
-        res.clearCookie("connect.sid", {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-        });
+})
 
-        return res.status(200).json(new ApiResponse(200, {}, "User logged out"));
-    });
-});
 
 
 
