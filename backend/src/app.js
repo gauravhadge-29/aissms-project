@@ -23,7 +23,7 @@ app.use(
     })
 );
 app.use(cors({
-  origin: "https://login-teal-psi.vercel.app/",
+  origin: "https://login-6zyixbqji-gauravhadge-29s-projects.vercel.app",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
