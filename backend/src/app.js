@@ -6,6 +6,7 @@ import MongoStore from "connect-mongo";
 
 
 const app = express()
+app.use(cookieParser())
 app.use(
     session({
         secret: process.env.SESSION_SECRET, // Store this in .env
@@ -23,7 +24,7 @@ app.use(
     })
 );
 app.use(cors({
-  origin: "https://login-6zyixbqji-gauravhadge-29s-projects.vercel.app",
+  origin: "https://login-teal-psi.vercel.app/",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -41,7 +42,7 @@ app.use(express.urlencoded({
 
 app.use(express.static("public"))
 
-app.use(cookieParser())
+
 
 app.use((req, res, next) => {
     console.log("Cookies Sent:", req.headers.cookie);
