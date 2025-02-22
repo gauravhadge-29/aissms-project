@@ -239,11 +239,7 @@ body {
     font-weight: 500;
 }
 
-.input-field1:focus {
-    border-color: #2980b9;
-    background-color: #ffffff;
-    box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.1);
-}
+
 
 .signup-button {
     width: 100%;
