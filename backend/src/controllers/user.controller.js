@@ -193,12 +193,15 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 // Get current user
 const getCurrentUser = asyncHandler(async (req, res) => {
-    if (!req.session.userId) {
-        throw new ApiError(401, "Unauthorized");
-    }
-
-    const user = await User.findById(req.session.userId).select("-password");
-    return res.status(200).json(new ApiResponse(200, user, "Current user fetched successfully"));
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(
+        200,
+        req.user,
+        "current user fetched successfully"
+        )
+    )
 });
 
 
