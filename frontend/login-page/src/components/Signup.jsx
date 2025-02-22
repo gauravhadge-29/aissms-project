@@ -26,7 +26,7 @@ const Signup = ({ setUser }) => {
         body: JSON.stringify(formData),
         credentials: "include",
       });
-      console.log(response)
+      console.log(response.message)
       const data = await response.json();
       console.log(data)
 
