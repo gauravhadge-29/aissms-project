@@ -90,6 +90,8 @@ const loginUser = asyncHandler(async (req, res) => {
         secure: true
     }
 
+    console.log(`Refresh Token: ${refreshToken} and Access Token : ${accessToken}`)
+
     return res.status(200)
     .cookie("accessToken",accessToken,options)
     .cookie("refreshToken",refreshToken,options)
