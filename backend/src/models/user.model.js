@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema(
     {
         uid: {  // ✅ Add uid for Google Auth
             type: String,
+            unique: false
         },
         username: {
             type: String,
