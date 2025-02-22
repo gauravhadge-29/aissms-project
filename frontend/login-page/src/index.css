@@ -308,3 +308,8 @@ body {
     font-size: 1rem;
     color: #7f8c8d;
 }
+
+.user-avatar{
+    height: 50%;
+    width: 50%;
+}
