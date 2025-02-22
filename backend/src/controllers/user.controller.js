@@ -87,7 +87,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
     const options = {
         httpOnly: true,
-        secure: true
+        secure: true,
+        sameSite: "None"
     }
 
     console.log(`Refresh Token: ${refreshToken} and Access Token : ${accessToken}`)
