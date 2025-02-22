@@ -37,7 +37,6 @@ export const signInWithGoogle = async () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          uid: user.uid,
           fullName: user.displayName,
           email: user.email,
           avatar : user.photoURL

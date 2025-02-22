@@ -105,7 +105,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 //loginwithgoogle
 const loginWithGoogle = asyncHandler(async (req, res) => {
-    const { uid, fullName, email, avatar } = req.body;
+    const { fullName, email, avatar } = req.body;
 
     if (!uid || !email) {
         throw new ApiError(400, "Google login failed, missing data");
@@ -115,7 +115,6 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
 
     if (!user) {
         user = await User.create({
-            uid : uid,
             fullName: fullName,
             email,
             username: email.split("@")[0], // Generate a default username
