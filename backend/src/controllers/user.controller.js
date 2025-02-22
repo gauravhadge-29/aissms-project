@@ -34,15 +34,15 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new ApiError(409, "Username or email already exists");
     }
 
-    const avatarLocalPath = req.files?.avatar[0]?.path;
-    if (!avatarLocalPath) throw new ApiError(400, "Avatar file is required");
+    // const avatarLocalPath = req.files?.avatar[0]?.path;
+    // if (!avatarLocalPath) throw new ApiError(400, "Avatar file is required");
 
-    const avatar = await uploadOnCloudinary(avatarLocalPath);
+    // const avatar = await uploadOnCloudinary(avatarLocalPath);
     const provider = "local";
 
     const user = await User.create({
         fullName,
-        avatar: avatar.url,
+        avatar: "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png",
         email,
         password,
         provider,

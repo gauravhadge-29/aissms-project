@@ -18,7 +18,7 @@ const Signup = ({ setUser }) => {
     setError(null);
 
     try {
-      const response = await fetch("https://data-discovery-login.onrender.com/api/v1/users/signup", {
+      const response = await fetch("https://data-discovery-login.onrender.com/api/v1/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -42,6 +42,7 @@ const Signup = ({ setUser }) => {
       <h2>Create a New Account</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSignup} className="form1">
+        <input className="input-field1" type="text" name="username" placeholder="username" value={formData.username} onChange={handleChange} required />
         <input className="input-field1" type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required />
         <input className="input-field1" type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
         <input className="input-field1" type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />

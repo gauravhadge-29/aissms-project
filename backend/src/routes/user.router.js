@@ -8,21 +8,15 @@ import {registerUser,
 
 } from "../controllers/user.controller.js";
 
-import {upload} from "../middlewares/multer.middleware.js"
+// import {upload} from "../middlewares/multer.middleware.js"
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { isAuthenticated } from "../middlewares/isauthenticated.middleware.js";
+// import { isAuthenticated } from "../middlewares/isauthenticated.middleware.js";
 
 const router = Router()
 
-router.route("/register").post(
-    upload.fields([
-        {
-            name:"avatar",
-            maxCount: 1
-        },
-    ]),
+router.route("/register").post(registerUser),
     
-    registerUser)
+    
 
 router.route("/login").post(loginUser)
 router.route("/auth/google").post(loginWithGoogle)
