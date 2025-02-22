@@ -11,7 +11,6 @@ export default function SocialLogin({ setUser }) {
       console.log(loggedInUser);
       alert(`Welcome, ${loggedInUser.data.user.fullName}!`);
       window.location.href = "https://data-discovery1.vercel.app/";
-
     }
   };
 
