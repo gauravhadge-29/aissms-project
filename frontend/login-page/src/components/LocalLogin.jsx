@@ -38,7 +38,7 @@ const LocalLogin = ({ setUser }) => {
         //  localStorage.setItem('user', JSON.stringify(user)); 
        
         alert("Login successful!");
-        navigate("https://data-discovery1.vercel.app/");
+        window.location.href = "https://data-discovery1.vercel.app/";
       } else {
         alert(`Error: ${result.message}`);
       }
