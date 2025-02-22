@@ -4,6 +4,7 @@ import { signInWithGoogle, logout } from "../firbase";
 export default function SocialLogin({ setUser }) {
   const handleGoogleLogin = async () => {
     const loggedInUser = await signInWithGoogle();
+    console.log(loggedInUser)
     if (loggedInUser) {
       setUser(loggedInUser); // Set user data on successful login
       console.log(loggedInUser);

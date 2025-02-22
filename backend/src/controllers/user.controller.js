@@ -107,6 +107,8 @@ const loginUser = asyncHandler(async (req, res) => {
 const loginWithGoogle = asyncHandler(async (req, res) => {
     const { fullName, email, avatar } = req.body;
 
+    console.log("This is req.body in loginwith google",req.body)
+
     if (!uid || !email) {
         throw new ApiError(400, "Google login failed, missing data");
     }
@@ -131,9 +133,9 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
 
     // localStorage.setItem("accessToken",accessToken)
     // localStorage.setItem("refreshToken",refreshToken)
-    req.session.userId = user._id;  // Store userId in session
-    req.session.accessToken = accessToken;
-    req.session.refreshToken = refreshToken;
+    // req.session.userId = user._id;  // Store userId in session
+    // req.session.accessToken = accessToken;
+    // req.session.refreshToken = refreshToken;
 
     const cookieOptions = {
         httpOnly: true,
