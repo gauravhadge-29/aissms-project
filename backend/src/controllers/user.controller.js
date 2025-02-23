@@ -141,6 +141,7 @@ const loginWithGoogle = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: "None",
+        domain:"http://data-discovery1-pro82l2et.vercel.app"
     };
 
     return res

@@ -10,7 +10,7 @@ export default function SocialLogin({ setUser }) {
       setUser(loggedInUser); // Set user data on successful login
       console.log(loggedInUser);
       alert(`Welcome, ${loggedInUser.data.user.fullName}!`);
-      window.location.href = "https://data-discovery1.vercel.app/";
+      window.location.href = "http://localhost:5173/";
     }
   };
 
